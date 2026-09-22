@@ -17,12 +17,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   color: var(--texto);
   background: var(--branco);
+  overflow-x: hidden;
 }
 
 .container {
@@ -138,8 +140,9 @@ span {
 
 .menu {
   display: flex;
+  align-items: center;
   gap: 35px;
-  margin-left: 499px;
+  margin-left: auto;
 }
 
 .menu a {
@@ -231,15 +234,25 @@ span {
   flex-wrap: wrap;
 }
 
+
 .hero-logo {
-  height: 430px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 38px;
+  width: 100%;
+  min-height: 430px;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(82, 196, 26, 0.16));
+  border-radius: 38px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9),
+    rgba(82, 196, 26, 0.16)
+  );
+}
+
+.hero-logo video {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
 }
 
 .hero-logo img {
@@ -324,8 +337,10 @@ section {
 
 .sobre-img {
   position: relative;
-  width: 520px;
+  width: 100%;
+  max-width: 520px;
   height: 520px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: center;
@@ -333,28 +348,28 @@ section {
 }
 
 .img-card {
-
   width: 380px;
   height: 380px;
-
   overflow: hidden;
+  position: relative;
+  z-index: 5;
 
   border-radius:
     42% 58% 35% 65% / 45% 40% 60% 55%;
 
-  position: relative;
-  z-index: 5;
-
   box-shadow:
     0 20px 45px rgba(0, 0, 0, .12);
-}
 
-.img-card img {
-
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-
+  clip-path: polygon(
+    15% 0%,
+    85% 0%,
+    100% 18%,
+    100% 82%,
+    85% 100%,
+    15% 100%,
+    0% 82%,
+    0% 18%
+  );
 }
 
 .circle {
@@ -411,32 +426,6 @@ section {
 
 }
 
-
-.img-card {
-
-  clip-path: polygon(15% 0%,
-      85% 0%,
-      100% 18%,
-      100% 82%,
-      85% 100%,
-      15% 100%,
-      0% 82%,
-      0% 18%);
-
-}
-
-.img-circle {
-
-  width: 390px;
-  height: 390px;
-  border-radius: 55% 45%;
-  background: linear-gradient(135deg, #dff3d9, #8bc56a);
-  display: grid;
-  place-items: center;
-  font-size: 8rem;
-  box-shadow: var(--sombra);
-
-}
 
 /* 
    ===============
@@ -590,20 +579,9 @@ section {
   transition: transform 0.6s ease;
 }
 
-.carousel-track:hover {
-  animation-play-state: paused;
-}
-
 .team-card {
   min-width: 260px;
   flex-shrink: 0;
-}
-
-.team-photo {
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
-  overflow: hidden;
 }
 
 .team-photo img {
@@ -614,7 +592,10 @@ section {
 }
 
 .team-photo {
+  width: 180px;
   height: 220px;
+  margin: 0 auto;
+  overflow: hidden;
   background: linear-gradient(135deg, #d9e9d2, #94bd7b);
   display: grid;
   place-items: center;
@@ -677,15 +658,6 @@ section {
   right: -70px;
 }
 
-@keyframes roletaEquipe {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
-}
 
 /* 
    ===============
@@ -811,10 +783,44 @@ section {
      RESPONSIVO 
    ===============
 */
+
+/* TABLETS */
+@media (max-width: 1100px) {
+
+  .container {
+    width: 90%;
+  }
+
+  .menu {
+    gap: 22px;
+  }
+
+  .hero-content {
+    gap: 35px;
+  }
+
+  .sobre-content {
+    gap: 40px;
+  }
+
+  .jornada-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pilares-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+/* TABLETS PEQUENOS */
 @media (max-width: 980px) {
 
-  .menu,
-  .btn-nav {
+  .menu {
     display: none;
   }
 
@@ -825,11 +831,43 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .jornada-cards,
-  .pilares-cards,
-  .contato-cards,
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-text p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-logo {
+    width: 100%;
+    min-height: 350px;
+  }
+
+  .sobre-img {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .jornada-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pilares-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contato-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .footer-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .prev {
@@ -839,20 +877,318 @@ section {
   .next {
     right: 5px;
   }
+
 }
 
+/* CELULAR */
 @media (max-width: 600px) {
+
+  section {
+    padding: 65px 0;
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  /* NAVBAR */
+  .header {
+    height: 65px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: auto;
+    padding-top: 105px;
+    padding-bottom: 65px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text span {
+    font-size: 0.78rem;
+  }
+
   .hero-text h1 {
     font-size: 3.5rem;
+    line-height: 1;
   }
 
-  .hero-logo h2 {
-    font-size: 2.8rem;
-    padding: 55px 30px;
+  .hero-text h2 {
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
 
-  .img-circle {
-    width: 280px;
-    height: 280px;
+  .hero-text p {
+    font-size: 0.92rem;
+    line-height: 1.7;
   }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-logo {
+    width: 100%;
+    min-height: 280px;
+    height: auto;
+    padding: 20px;
+  }
+
+  .hero-logo video {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* CITAÇÃO */
+  blockquote {
+    width: 90%;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  /* TÍTULOS */
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 35px;
+  }
+
+  .leaf-divider {
+    gap: 8px;
+    margin-bottom: 35px;
+  }
+
+  .line {
+    width: 65px;
+  }
+
+  .leaf {
+    width: 50px;
+  }
+
+  /* SOBRE */
+  .sobre-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sobre-text {
+    text-align: center;
+  }
+
+  .sobre-text h2 {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+
+  .sobre-text p {
+    font-size: 0.93rem;
+  }
+
+  .sobre-img {
+    width: 100%;
+    height: 350px;
+    max-width: 100%;
+  }
+
+  .img-card {
+    width: 270px;
+    height: 270px;
+  }
+
+  .circle-1 {
+    width: 110px;
+    height: 110px;
+    top: 20px;
+    left: 5px;
+  }
+
+  .circle-2 {
+    width: 160px;
+    height: 160px;
+    bottom: 5px;
+    right: 5px;
+  }
+
+  .mini-icon {
+    width: 58px;
+    height: 58px;
+    bottom: 25px;
+    right: 20px;
+  }
+
+  .mini-icon img {
+    width: 27px;
+  }
+
+  /* JORNADA */
+  .jornada-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 30px 22px;
+  }
+
+  /* PILARES */
+  .pilares-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pilar-card {
+    text-align: center;
+  }
+
+  .pilar-card .icon {
+    margin: 0 auto 16px;
+  }
+
+  /* OBJETIVO */
+  .objetivo-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .objetivo h2 {
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+
+  .objetivo p {
+    font-size: 0.93rem;
+  }
+
+  /* EQUIPE */
+  .carousel-wrapper {
+    padding: 15px 0;
+  }
+
+  .team-card {
+    min-width: 85vw;
+    padding: 30px 20px;
+  }
+
+  .team-photo {
+    width: 170px;
+    height: 210px;
+  }
+
+  .carousel-btn {
+    padding: 7px;
+    font-size: 1.2rem;
+  }
+
+  /* CONTATO */
+  .contato-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .contato h2 {
+    font-size: 2rem;
+  }
+
+  .contato-cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 55px 0 20px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 35px;
+  }
+
+  .footer-content > div {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .footer img {
+    margin: 0 auto;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+
+  .redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+}
+
+/* CELULARES PEQUENOS */
+@media (max-width: 380px) {
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero-logo {
+    min-height: 240px;
+  }
+
+  .img-card {
+    width: 240px;
+    height: 240px;
+  }
+
+  .sobre-img {
+    height: 310px;
+  }
+
+  .circle-1 {
+    width: 90px;
+    height: 90px;
+  }
+
+  .circle-2 {
+    width: 130px;
+    height: 130px;
+  }
+
+  .mini-icon {
+    width: 52px;
+    height: 52px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .objetivo h2 {
+    font-size: 1.8rem;
+  }
+
 }
