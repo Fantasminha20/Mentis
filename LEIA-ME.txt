@@ -1,0 +1,24 @@
+MENTIS — SITE CONCEITUAL EM HTML, CSS E JAVASCRIPT
+
+ARQUIVOS PRINCIPAIS
+- index.html: estrutura e conteúdo do site.
+- CSS/style.css: cores, tipografia, layout, responsividade e animações.
+- JS/script.js: menu mobile, animações de entrada e ano do rodapé.
+- image/: imagens e logotipos aproveitados do projeto enviado.
+
+COMO ABRIR
+1. Extraia a pasta Mentis_novo.
+2. Mantenha a estrutura de pastas como está.
+3. Abra index.html no navegador. Para desenvolver, recomenda-se usar a extensão Live Server do VS Code.
+
+PERSONALIZAÇÃO
+- Cores: edite as variáveis no início de CSS/style.css.
+- Textos e links: edite index.html.
+- Imagens da equipe: troque os arquivos dentro de image/ ou altere os caminhos em index.html.
+- Contato: atualize o e-mail e os links de redes sociais antes de publicar.
+
+OBSERVAÇÕES
+- O site é uma nova versão conceitual de uma página única, inspirada no protótipo visual e nos conteúdos da Mentis enviados pelo usuário.
+- O painel SafeMind é uma ilustração de interface feita em HTML/CSS, não é um produto funcional nem faz login ou registra dados.
+- Google Fonts exige conexão com a internet; fontes de sistema serão usadas como alternativa se estiver offline.
+- Confira nomes, fotos, redes sociais e formas de contato antes de publicar.
