@@ -1,59 +1,110 @@
-const toggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.navigation');
+const menuToggle = document.querySelector('.menu-toggle');
+const mainNav = document.querySelector('.main-nav');
 
-if (toggle && nav) {
-  toggle.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    toggle.setAttribute('aria-label', open ? 'Abrir menu' : 'Fechar menu');
-    nav.classList.toggle('open', !open);
+// Menu mobile: abre e fecha com o botão, e fecha ao escolher uma seção.
+if (menuToggle && mainNav) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Abrir menu' : 'Fechar menu');
+    mainNav.classList.toggle('is-open', !isOpen);
   });
 
-  nav.querySelectorAll('a').forEach(link => {
+  mainNav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Abrir menu');
-      nav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menu');
+      mainNav.classList.remove('is-open');
     });
   });
 }
 
-const year = document.getElementById('year');
-if (year) year.textContent = new Date().getFullYear();
+// Animações de entrada ao rolar a página; conteúdo continua acessível sem JS.
+const revealElements = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        currentObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealElements.forEach((element) => observer.observe(element));
+} else {
+  revealElements.forEach((element) => element.classList.add('is-visible'));
+}
 
-const track = document.getElementById('team-track');
-const previous = document.querySelector('.team-prev');
-const next = document.querySelector('.team-next');
-const counter = document.getElementById('team-counter');
-const progress = document.getElementById('team-progress-fill');
+// Atualiza o ano do rodapé automaticamente.
+const yearElement = document.getElementById('year');
+if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-if (track && previous && next) {
-  const cards = [...track.querySelectorAll('.team-card')];
 
-  function updateCarousel() {
-    const max = Math.max(0, track.scrollWidth - track.clientWidth);
-    const current = track.scrollLeft;
-    const index = cards.reduce((found, card, i) =>
-      card.offsetLeft - track.offsetLeft <= current + 12 ? i : found, 0);
+const teamTrack = document.querySelector("#team-track");
+const teamPrev = document.querySelector(".team-prev");
+const teamNext = document.querySelector(".team-next");
+const teamCounter = document.querySelector("#team-counter");
+const teamProgress = document.querySelector("#team-progress-fill");
 
-    if (counter) counter.textContent =
-      `${String(index + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
-    if (progress) progress.style.width = `${max ? Math.max(9, current / max * 100) : 100}%`;
+if (teamTrack && teamPrev && teamNext) {
+  const cards = [...teamTrack.querySelectorAll(".team-card")];
 
-    previous.disabled = current <= 2;
-    next.disabled = current >= max - 2;
+  function updateTeamCarousel() {
+    const maxScroll =
+      teamTrack.scrollWidth - teamTrack.clientWidth;
+
+    const currentScroll = teamTrack.scrollLeft;
+
+    const progress = maxScroll > 0
+      ? currentScroll / maxScroll
+      : 0;
+
+    const currentIndex = cards.reduce((last, card, index) => {
+      return card.offsetLeft - teamTrack.offsetLeft
+        <= currentScroll + 10
+        ? index
+        : last;
+    }, 0);
+
+    teamCounter.textContent =
+      `${String(currentIndex + 1).padStart(2, "0")} / ` +
+      `${String(cards.length).padStart(2, "0")}`;
+
+    teamProgress.style.width =
+      `${Math.max(25, progress * 100)}%`;
+
+    teamPrev.disabled = currentScroll <= 2;
+    teamNext.disabled = currentScroll >= maxScroll - 2;
+
+    teamPrev.style.opacity = teamPrev.disabled ? "0.4" : "1";
+    teamNext.style.opacity = teamNext.disabled ? "0.4" : "1";
   }
 
-  function move(direction) {
+  function moveTeam(direction) {
     const card = cards[0];
+
     if (!card) return;
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    track.scrollBy({ left: (card.getBoundingClientRect().width + gap) * direction, behavior: 'smooth' });
+
+    const gap = parseFloat(
+      getComputedStyle(teamTrack).gap
+    ) || 0;
+
+    const distance = card.getBoundingClientRect().width + gap;
+
+    teamTrack.scrollBy({
+      left: distance * direction,
+      behavior: "smooth"
+    });
   }
 
-  previous.addEventListener('click', () => move(-1));
-  next.addEventListener('click', () => move(1));
-  track.addEventListener('scroll', updateCarousel, { passive: true });
-  window.addEventListener('resize', updateCarousel);
-  updateCarousel();
+  teamPrev.addEventListener("click", () => moveTeam(-1));
+  teamNext.addEventListener("click", () => moveTeam(1));
+
+  teamTrack.addEventListener("scroll", updateTeamCarousel, {
+    passive: true
+  });
+
+  window.addEventListener("resize", updateTeamCarousel);
+
+  updateTeamCarousel();
 }
