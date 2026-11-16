@@ -1,4 +1,4 @@
-MENTIS - Novo Commit
+MENTIS -- Novo Commit
 
 ESTRUTURA
 - index.html: página principal e conteúdo.
