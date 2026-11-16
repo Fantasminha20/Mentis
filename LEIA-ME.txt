@@ -1,0 +1,17 @@
+MENTIS - Novo Commit
+
+ESTRUTURA
+- index.html: página principal e conteúdo.
+- CSS/style.css: identidade visual, layout e responsividade.
+- JS/script.js: menu mobile, carrossel da equipe e ano automático.
+- image/: imagens, logotipo e fotografias da equipe fornecidos no projeto original.
+
+Não há grandes alteraçoes no novo commit, eu apenas adicionei um gradiente colorido para remeter  o metalico do Slide
+que aparece no louva-a-deus.
+Pag ta simples, estatica e completa ja que nao precisa colocar muito
+
+SO PRECISA ALTERAR A FOTO DA GALERA DO GRUPO
+
+leo eu te AMO
+
+assinado: levi
