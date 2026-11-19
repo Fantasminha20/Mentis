@@ -670,11 +670,15 @@ button {
     margin-top: 18px;
 }
 
+
+/* PRÉVIA REAL DO SAFEMIND */
+
 .project-art {
     position: relative;
     min-height: 410px;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .project-orbit {
@@ -686,53 +690,50 @@ button {
     transform: rotate(-23deg);
 }
 
-.app-window {
-    width: min(100%,470px);
-    background: #f2f5ed;
-    color: #172017;
-    box-shadow: 0 28px 80px rgba(0,0,0,.42);
-    transform: rotate(1.5deg);
+.project-preview {
     position: relative;
     z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f2f5ed;
+    border: 1px solid rgba(199,243,106,.15);
+    box-shadow: 0 28px 80px rgba(0,0,0,.42);
+    transform: rotate(1.5deg);
+    transition: transform .4s ease, box-shadow .4s ease;
 }
 
-.app-top {
-    height: 34px;
-    background: #e4eadd;
-    border-bottom: 1px solid #d2dccb;
+.project-preview:hover {
+    transform: rotate(0deg) translateY(-5px);
+    box-shadow: 0 35px 85px rgba(0,0,0,.5);
+}
+
+.project-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.preview-overlay {
+    position: absolute;
+    inset: auto 0 0;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0 14px;
-    color: #71806b;
-    font: .5rem var(--mono);
-    letter-spacing: .08em;
+    align-items: center;
+    padding: 22px 18px 14px;
+    color: white;
+    font: .52rem var(--mono);
+    letter-spacing: .1em;
+    background: linear-gradient(transparent,rgba(0,0,0,.7));
+    opacity: 0;
+    transition: opacity .3s ease;
 }
 
-.window-dots {
-    color: #8da084;
-    letter-spacing: .2em;
+.project-preview:hover .preview-overlay {
+    opacity: 1;
 }
 
-.app-content {
-    padding: 28px 35px 30px;
-}
-
-.app-brand {
-    font: 800 1.1rem var(--display);
-    letter-spacing: -.06em;
-    margin-bottom: 27px;
-}
-
-.app-brand span {
-    font-weight: 400;
-}
-
-.app-brand i {
-    font-style: normal;
-    color: #5b9a4a;
-    margin-left: 4px;
-}
 
 .app-content>small {
     font: .5rem var(--mono);
@@ -749,45 +750,6 @@ button {
 .app-content p {
     font-size: .72rem;
     color: #687464;
-}
-
-.moods {
-    display: flex;
-    gap: 11px;
-    margin-top: 18px;
-}
-
-.moods span {
-    width: 38px;
-    height: 38px;
-    border: 1px solid #bdcbb4;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    color: #4d8143;
-}
-
-.app-line {
-    height: 6px;
-    width: 82%;
-    background: #dce4d6;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.app-line.short {
-    width: 55%;
-    margin-top: 8px;
-}
-
-.app-cta {
-    display: inline-flex;
-    gap: 25px;
-    background: #c7f36a;
-    color: #1d2a17;
-    padding: 10px 13px;
-    margin-top: 20px;
-    font: .53rem var(--mono);
 }
 
 .project-stamp {
